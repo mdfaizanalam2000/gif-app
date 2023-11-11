@@ -11,7 +11,7 @@ const Home = () => {
     const [gifs, setGifs] = useState([]);
     const [message, setMessage] = useState("");
     const [start, setStart] = useState(0);
-    const [end, setEnd] = useState(10);
+    const [end, setEnd] = useState(15);
 
     // Check the user authentication state and redirect to login page if not logged in
     useEffect(() => {
@@ -74,12 +74,14 @@ const Home = () => {
             </div>
             <div className="gallery">
                 {gifs && gifs.slice(start, end).map((gif) => (
-                    <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
+                    <div key={gif.id}>
+                        <img src={gif.images.fixed_height.url} alt={gif.title} />
+                    </div>
                 ))}
             </div>
             {gifs.length > 0 && <div className="pagination button">
-                <button disabled={start === 0} onClick={() => { setStart(start - 10); setEnd(end - 10) }}>&lt; Previous</button>
-                <button onClick={() => { setStart(start + 10); setEnd(end + 10) }}>Show next 10 &gt;</button>
+                <button disabled={start === 0} onClick={() => { setStart(start - 15); setEnd(end - 15) }}>&lt; Previous</button>
+                <button onClick={() => { setStart(start + 15); setEnd(end + 15) }}>Show next 15 &gt;</button>
             </div>}
         </>
     );

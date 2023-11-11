@@ -39,10 +39,7 @@ button {
 .gallery {
   padding: 0 10%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 10px;
-  column-gap: 5px;
-  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .error {
@@ -104,20 +101,30 @@ button[disabled] {
   background-color: gray;
 }
 
+img {
+  width: 90%;
+  height: 90%;
+}
+
+.gallery div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* CSS for responsiveness */
 @media only screen and (max-width: 850px) {
   .gallery {
     padding: 0;
-    display: grid;
     grid-template-columns: 1fr;
   }
 
   .container {
     margin: 0;
-    padding: 0 5%;
+    padding: 5%;
   }
 
-  img {
-    max-width: 100vw;
+  #greeting {
+    font-size: larger;
   }
 }
