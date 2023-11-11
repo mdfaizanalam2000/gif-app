@@ -29,17 +29,17 @@ const Login = () => {
     // Handle the sign up form submit event and create a new user with Firebase
     const handleSignUp = (e) => {
         e.preventDefault();
-        if (password !== cpassword) {
-            setError("Passwords are not matching!");
-        }
-        else if (!email || !password || !cpassword) {
+        if (!email || !password || !cpassword) {
             setError("One or more fields are empty!");
+        }
+        else if (password !== cpassword) {
+            setError("Passwords are not matching!");
         }
         else {
             setError("Signing up...");
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => {
-                    router.push('/login');
+                    router.push('/');
                 })
                 .catch((error) => {
                     setError(error.message);
