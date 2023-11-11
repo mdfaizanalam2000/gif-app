@@ -28,6 +28,8 @@ const Home = () => {
                 const response = await fetch(`https://api.giphy.com/v1/gifs/trending/?api_key=${API_KEY}`);
                 const parsedData = await response.json();
                 setGifs(parsedData.data);
+                setStart(0);
+                setEnd(15);
                 setMessage(`Showing trending🔥GIFs`);
             } catch (error) {
                 setMessage("Some error occured, Try again!");
@@ -56,6 +58,8 @@ const Home = () => {
             const response = await fetch(`https://api.giphy.com/v1/gifs/search/?api_key=${API_KEY}&q=${query}`);
             const parsedData = await response.json();
             setGifs(parsedData.data);
+            setStart(0);
+            setEnd(15);
             setMessage(`Showing results for "${query}"`);
         } catch (error) {
             setMessage("Some error occured, Try again!");
@@ -73,15 +77,15 @@ const Home = () => {
                 </form>
             </div>
             <div className="gallery">
-                {gifs && gifs.slice(start, end).map((gif) => (
-                    <div key={gif.id}>
+                {gifs && gifs.slice(start, end).map((gif, index) => (
+                    <div key={gif.id + index}>
                         <img src={gif.images.fixed_height.url} alt={gif.title} />
                     </div>
                 ))}
             </div>
             {gifs.length > 0 && <div className="pagination button">
                 <button disabled={start === 0} onClick={() => { setStart(start - 15); setEnd(end - 15) }}>&lt; Previous</button>
-                <button onClick={() => { setStart(start + 15); setEnd(end + 15) }}>Show next 15 &gt;</button>
+                <button disabled={end > gifs.length} onClick={() => { setStart(start + 15); setEnd(end + 15) }}>Show next 15 &gt;</button>
             </div>}
         </>
     );
